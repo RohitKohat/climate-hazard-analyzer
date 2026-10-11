@@ -23,6 +23,18 @@ app.add_middleware(
 
 app.include_router(analyze.router, prefix="/api")
 
+
 @app.get("/")
 def root():
     return {"status": "ok", "service": "climate-hazard-analyzer"}
+
+
+@app.head("/")
+def head_root():
+    # Render's health checker sends HEAD requests to /
+    return {}
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
